@@ -19,14 +19,15 @@ tell you whether it satisfies the rule or not. You can test as many sequences as
 you want. </p>
 
 <!-- STATIC INTRO CONTENT ABOVE -->
+<% @past_guesses = session.fetch(:puzzle_history)%>
+<% if @past_guesses == nil %>
 
+<% else %>
 <p class="lead">
   Your guesses:
 </p>
 
 <!-- LOOP OVER ALL OF THE USER'S GUESSES HERE -->
-  <% @past_guesses = session.fetch(:puzzle_history)%>
-    <% if @past_guesses != nil %>
       <% @past_guesses.each do |guesses|%>
           <% if guesses.fetch("results") == "yes" %>
             <p class="lead">
@@ -108,7 +109,7 @@ chance.</strong></p>
   <div>
     <textarea name="the_rule"></textarea>
   </div>
-  <button>Submit!</button>
+  <button>Check</button>
 </form>
 
 
