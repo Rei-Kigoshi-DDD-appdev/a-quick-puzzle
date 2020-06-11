@@ -25,6 +25,7 @@ you want. </p>
 </p>
 
 <!-- LOOP OVER ALL OF THE USER'S GUESSES HERE -->
+
   <!-- Here's the first guess -->
   <p class="lead">
     <span class="badge badge-success">
@@ -48,15 +49,16 @@ you want. </p>
   <!-- Here's the second guess -->
   <p class="lead">
     <span class="badge badge-danger">
-      3
+      <%= session.fetch(:puzzle_history).at(0).fetch("first_num") %>
+      
     </span>
 
     <span class="badge badge-danger">
-      2
+       <%= session.fetch(:puzzle_history).at(0).fetch("second_num") %>
     </span>
 
     <span class="badge badge-danger">
-      1
+       <%= session.fetch(:puzzle_history).at(0).fetch("third_num") %>
     </span>
 
     <span class="text-danger">
@@ -104,6 +106,15 @@ chance.</strong></p>
 <hr>
 
 <!-- FORM FOR FINAL RULE ENTRY GOES SOMEWHERE HERE -->
+<form action="/record_rule" method="post">
+  <div>
+    <label>My guess at the rule</label>
+  </div>
+  <div>
+    <textarea name="the_rule"></textarea>
+  </div>
+  <button>Submit!</button>
+</form>
 
 
 <h2>Your guess was:</h2>
