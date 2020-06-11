@@ -25,66 +25,42 @@ you want. </p>
 </p>
 
 <!-- LOOP OVER ALL OF THE USER'S GUESSES HERE -->
-
-  <!-- Here's the first guess -->
-  <p class="lead">
-    <span class="badge badge-success">
-      3
-    </span>
-
-    <span class="badge badge-success">
-      6
-    </span>
-
-    <span class="badge badge-success">
-      12
-    </span>
-
-    <span class="text-success">
-        Yes!
-    </span>
-  </p>
-  <!-- End first guess -->
-
-  <!-- Here's the second guess -->
-  <p class="lead">
-    <% if @puzzle_results.class == NilClass %>
-    
-    <% elsif @puzzle_results = "yes" %>
-      <span class="badge badge-success">
-        <%= session.fetch(:puzzle_history).at(0).fetch("first_num") %>
-      </span>
-
-      <span class="badge badge-success">
-         <%= session.fetch(:puzzle_history).at(0).fetch("second_num") %>
-     </span>
-
-      <span class="badge badge-success">
-         <%= session.fetch(:puzzle_history).at(0).fetch("third_num") %>
-      </span>
-
-      <span class="text-success">
-         Yes!
-     </span>
-    <% else  %>
-      <span class="badge badge-danger">
-        <%= session.fetch(:puzzle_history).at(0).fetch("first_num") %>
-      </span>
-
-      <span class="badge badge-danger">
-         <%= session.fetch(:puzzle_history).at(0).fetch("second_num") %>
-     </span>
-
-      <span class="badge badge-danger">
-         <%= session.fetch(:puzzle_history).at(0).fetch("third_num") %>
-      </span>
-
-      <span class="text-danger">
-         No.
-     </span>
+  <% @past_guesses = session.fetch(:puzzle_history)%>
+    <% if @past_guesses != nil %>
+      <% @past_guesses.each do |guesses|%>
+          <% if guesses.fetch("results") == "yes" %>
+            <p class="lead">
+              <span class="badge badge-success">
+                <%= guesses.fetch("first_num")%>
+              </span>
+              <span class="badge badge-success">
+                <%= guesses.fetch("second_num")%>
+              </span>
+              <span class="badge badge-success">
+                <%= guesses.fetch("third_num")%>
+              </span>
+              <span class="text-success">
+              Yes!
+              </span>
+            </p>
+          <% else %>
+            <p class="lead">
+              <span class="badge badge-danger">
+                <%= guesses.fetch("first_num")%>
+              </span>
+              <span class="badge badge-danger">
+              <%= guesses.fetch("second_num")%>
+              </span>
+              <span class="badge badge-danger">
+              <%= guesses.fetch("third_num")%>
+              </span>
+              <span class="text-danger">
+              No.
+              </span>
+            </p>
+          <% end %>
+      <% end %>
     <% end %>
-  </p>
-  <!-- End second guess -->
 <!-- END GUESSES LOOP -->
 
 <!-- SECTION FOR THE GUESS FORM -->

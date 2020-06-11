@@ -12,9 +12,9 @@ class PagesController < ApplicationController
 
     #results of the puzzle
     if @first_num < @second_num && @second_num < @third_num 
-      @puzzle_results = yes
+      @puzzle_results = "yes"
     else 
-      @puzzle_results = no
+      @puzzle_results = "no"
     end
 
 
@@ -29,7 +29,7 @@ class PagesController < ApplicationController
     older_results = session.fetch(:puzzle_history)
 
     if older_results.class == NilClass
-      @older_results = Array.new
+      older_results = Array.new
     end
 
     older_results.push(puzzle_results)
