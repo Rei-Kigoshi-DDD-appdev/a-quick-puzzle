@@ -41,7 +41,11 @@ class PagesController < ApplicationController
 
   def write_rule
     #make a cookie with a person's rule guess
-    @puzzle_guess = session.fetch(:rule_guess)
+
+    #Parameters: {"the_rule"=>"doubling numbers"}
+    user_rules = params.fetch("the_rule")
+
+    session.store(:rule_guess, user_rules)
 
     redirect_to("/")
   end
