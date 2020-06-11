@@ -17,14 +17,6 @@ class PagesController < ApplicationController
       @puzzle_results = no
     end
 
-    #styling of results
-    @class_styling = String.new
-
-    if @puzzle_results = yes 
-      @class_styling = "badge badge-success"
-    else 
-      @styling = "danger"
-    end
 
     #store parameters into session
     puzzle_results = {
@@ -43,14 +35,14 @@ class PagesController < ApplicationController
     older_results.push(puzzle_results)
     session.store(:puzzle_history, older_results)
 
-    @show_results = older_results
-
     redirect_to("/")
   end
 
 
   def write_rule
     #make a cookie with a person's rule guess
+    @puzzle_guess = session.fetch(:rule_guess)
+
     redirect_to("/")
   end
 end

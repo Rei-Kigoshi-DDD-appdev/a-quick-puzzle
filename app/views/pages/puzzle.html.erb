@@ -48,22 +48,41 @@ you want. </p>
 
   <!-- Here's the second guess -->
   <p class="lead">
-    <span class="badge badge-danger">
-      <%= session.fetch(:puzzle_history).at(0).fetch("first_num") %>
-      
-    </span>
+    <% if @puzzle_results.class == NilClass %>
+    
+    <% elsif @puzzle_results = "yes" %>
+      <span class="badge badge-success">
+        <%= session.fetch(:puzzle_history).at(0).fetch("first_num") %>
+      </span>
 
-    <span class="badge badge-danger">
-       <%= session.fetch(:puzzle_history).at(0).fetch("second_num") %>
-    </span>
+      <span class="badge badge-success">
+         <%= session.fetch(:puzzle_history).at(0).fetch("second_num") %>
+     </span>
 
-    <span class="badge badge-danger">
-       <%= session.fetch(:puzzle_history).at(0).fetch("third_num") %>
-    </span>
+      <span class="badge badge-success">
+         <%= session.fetch(:puzzle_history).at(0).fetch("third_num") %>
+      </span>
 
-    <span class="text-danger">
-        No.
-    </span>
+      <span class="text-success">
+         Yes!
+     </span>
+    <% else  %>
+      <span class="badge badge-danger">
+        <%= session.fetch(:puzzle_history).at(0).fetch("first_num") %>
+      </span>
+
+      <span class="badge badge-danger">
+         <%= session.fetch(:puzzle_history).at(0).fetch("second_num") %>
+     </span>
+
+      <span class="badge badge-danger">
+         <%= session.fetch(:puzzle_history).at(0).fetch("third_num") %>
+      </span>
+
+      <span class="text-danger">
+         No.
+     </span>
+    <% end %>
   </p>
   <!-- End second guess -->
 <!-- END GUESSES LOOP -->
@@ -117,10 +136,14 @@ chance.</strong></p>
 </form>
 
 
+
+<% if @puzzle_guess.class == NilClass %>
+
+<% else true %>
 <h2>Your guess was:</h2>
 
 <p class="lead">
-  Doubling numbers
+  <%= @puzzle_guess %>
 </p>
 
 <!-- Static conclusion content below -->
@@ -226,3 +249,6 @@ specialist, for suggesting this problem and helping put it in a larger
 context.</p>
 
 <p class="lead"><a href="https://www.nytimes.com/interactive/2015/07/03/upshot/a-quick-puzzle-to-test-your-problem-solving.html" target="_blank">Original source</a>: https://www.nytimes.com/interactive/2015/07/03/upshot/a-quick-puzzle-to-test-your-problem-solving.html</p>
+
+
+<% end %>
